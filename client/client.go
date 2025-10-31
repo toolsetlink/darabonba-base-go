@@ -8,12 +8,15 @@ import (
 	"time"
 )
 
+// TimeRFC3339 生成RFC3339格式的时间字符串
+// TimeRFC3339 generates a time string in RFC3339 format
 func TimeRFC3339() *string {
 	timestamp := time.Now().Format(time.RFC3339)
 	return &timestamp
 }
 
-// 生成随机Nonce (16位十六进制)
+// GenerateNonce 生成随机Nonce (16位十六进制)
+// GenerateNonce generates a random Nonce (16-bit hexadecimal)
 func GenerateNonce() *string {
 	bytes := make([]byte, 8)
 	if _, err := rand.Read(bytes); err != nil {
@@ -23,7 +26,8 @@ func GenerateNonce() *string {
 	return &str
 }
 
-// 生成请求签名
+// GenerateSignature 生成请求签名
+// GenerateSignature generates a request signature
 func GenerateSignature(body, nonce, secretKey, timestamp, uri *string) *string {
 	var parts []string
 
